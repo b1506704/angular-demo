@@ -8,7 +8,7 @@ import { House } from '../models/house.model';
   providedIn: 'root',
 })
 export class FetchHouseService {
-  apiHouseUrl = 'http://real-estate-shop.herokuapp.com/houses';
+  apiHouseUrl = 'https://real-estate-shop.herokuapp.com/houses';
   // httpOptions = {
   //   headers: new HttpHeaders({
   //     'Content-Type': 'application/json'
