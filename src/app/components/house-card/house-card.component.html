@@ -1,0 +1,32 @@
+<div class="container-fluid mt-5">
+    <h2>Card View (1st Child)</h2>
+    <div class="d-flex align-content-center justify-content-center">
+      <div
+        [ngClass]="{
+          'd-none': done === true,
+          'spinner-border text-primary ': done === false
+        }"
+        role="status"
+      ></div>
+    </div>
+    <div class="row justify-content-evenly align-content-center">
+      <div
+        class="card mt-5 rounded-3 border-5 shadow-lg"
+        style="width: 18rem"
+        *ngFor="let item of house"
+      >
+        <img src="{{ item.imgUrl }}" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ item.message }}</h5>
+          <p class="card-text">Category: {{ item.category }}</p>
+          <p class="card-text">Area: {{ item.area }}</p>
+          <p class="card-text">Front: {{ item.front }}</p>
+          <p class="card-text">Addess: {{ item.address }}</p>
+          <p class="card-text">Direction: {{ item.direction }}</p>
+          <!-- todo: Subroute with param -->
+          <a class="btn btn-primary">Detail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

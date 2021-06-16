@@ -10,6 +10,10 @@ import { HouseComponent } from './components/house/house.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HouseCardComponent } from './components/house-card/house-card.component';
+import { HouseCarouselComponent } from './components/house-carousel/house-carousel.component';
+import { RouteAComponent } from './components/route-a/route-a.component';
+import { RouteBComponent } from './components/route-b/route-b.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     HouseComponent,
     PostsComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    HouseCardComponent,
+    HouseCarouselComponent,
+    RouteAComponent,
+    RouteBComponent
   ],
   imports: [
     BrowserModule,

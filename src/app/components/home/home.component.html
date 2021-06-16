@@ -1,4 +1,13 @@
-<div class="container-fluid bg-light flex-column align-content-center justify-content-center">
-    <p>home works!</p>
-
+<div class="container-fluid bg-light d-flex align-content-center justify-content-start">
+    <div class="flex-column">
+        <div class="col mt-1">
+            <button class="btn btn-primary shadow" (click)="subRouteA()">Route A</button>
+        </div>
+        <div class="col mt-1">
+            <button class="btn btn-dark shadow" (click)="subRouteB()">Route B</button>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+    <!-- <app-route-a (messageEvent)="setMsgFromChild($event)"></app-route-a> -->
+    <!-- <h2>Value from child: {{msgFromChild}}</h2> -->
 </div>

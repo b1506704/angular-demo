@@ -1,0 +1,66 @@
+<div class="container-fluid mt-5">
+  <h2>Carousel View (2nd Child)</h2>
+  <div class="d-flex align-content-center justify-content-center">
+    <div
+      [ngClass]="{
+        'd-none': done === true,
+        'spinner-border text-primary ': done === false
+      }"
+      role="status"
+    ></div>
+  </div>
+  <div
+    id="carouselExampleDark"
+    class="carousel carousel-dark slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        [attr.data-bs-slide-to]="i"
+        class="active"
+        aria-current="true"
+        [attr.aria-label]="'Slide' + (i + 1)"
+        *ngFor="let item of house; index as i"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        data-bs-interval="10000"
+        *ngFor="let item of house; index as i"
+        [ngClass]="{ active: i === 1 }"
+      >
+        <img
+          src="{{ item.imgUrl }}"
+          class="d-block w-100 shadow-lg"
+          alt="..."
+          style="width: 100% !important; height: 800px; border-radius: 25px;"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-light bg-dark shadow-lg">{{ i }}</h5>
+          <p class="text-light bg-dark shadow-lg">{{ item.message }}</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
