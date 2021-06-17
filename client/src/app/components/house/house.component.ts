@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { House } from 'src/app/models/house.model';
-import { FetchHouseService } from 'src/app/services/fetch-house.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-house',
   templateUrl: './house.component.html',
-  styleUrls: ['./house.component.css']
+  styleUrls: ['./house.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HouseComponent implements OnInit {
   house: Array<House> = [];
-  done: Boolean = false;
-  constructor(private fetchHouse: FetchHouseService) { }
+  constructor(private store: StoreService) { }
 
   ngOnInit(): void {
-    this.fetchHouse.fetchHouse().subscribe((data: any) => {
-      this.house = data;
-      this.done = true;
+    // this.store.loadData();
+    this.store.$state.subscribe((state: any) => {
+      this.house = state.houseList;
     })
   }
 

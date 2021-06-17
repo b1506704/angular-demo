@@ -1,4 +1,6 @@
 <div class="container-fluid">
-  <app-house-card [house]="house" [done]="done"></app-house-card>
-  <app-house-carousel [house]="house" [done]="done"></app-house-carousel>
+  <!-- first child get value from parent -->
+  <app-house-card [house]="house"></app-house-card>
+  <!-- second child but get value from store instead -->
+  <app-house-carousel></app-house-carousel>
 </div>

@@ -1,14 +1,5 @@
 <div class="container-fluid mt-5">
   <h2>Carousel View (2nd Child)</h2>
-  <div class="d-flex align-content-center justify-content-center">
-    <div
-      [ngClass]="{
-        'd-none': done === true,
-        'spinner-border text-primary ': done === false
-      }"
-      role="status"
-    ></div>
-  </div>
   <div
     id="carouselExampleDark"
     class="carousel carousel-dark slide"
@@ -36,7 +27,7 @@
           src="{{ item.imgUrl }}"
           class="d-block w-100 shadow-lg"
           alt="..."
-          style="width: 100% !important; height: 800px; border-radius: 25px;"
+          style="width: 100% !important; height: 800px; border-radius: 25px"
         />
         <div class="carousel-caption d-none d-md-block">
           <h5 class="text-light bg-dark shadow-lg">{{ i }}</h5>

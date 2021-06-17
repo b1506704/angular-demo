@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-route-b',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RouteBComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: StoreService) { }
+
+  fetchFromStore() {
+    this.store.loadData();
+  }
 
   ngOnInit(): void {
   }

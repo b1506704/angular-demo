@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { House } from 'src/app/models/house.model';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-house-card',
@@ -7,9 +8,13 @@ import { House } from 'src/app/models/house.model';
   styleUrls: ['./house-card.component.css']
 })
 export class HouseCardComponent implements OnInit {
-  @Input() done: Boolean = false;
+  // data from parent component
   @Input() house: Array<House> = [];
-  constructor() { }
+  constructor(private store: StoreService) { }
+  // set selectedHouse in store
+  selectHouse (house: House) {
+    this.store.selectHouse(house);
+  }
 
   ngOnInit(): void {
   }
