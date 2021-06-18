@@ -10,6 +10,7 @@ import { StoreService } from 'src/app/services/store.service';
 export class HomeComponent implements OnInit {
   msgFromChild = '';
   selectedHouse: Object = {};
+  houseVisitTime: Date = new Date();
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
     this.route.url.subscribe((url) => console.log('Current route: ' + url));
     this.store.$state.subscribe((state) => {
       this.selectedHouse = state.selectedHouse;
+      this.houseVisitTime = state.lastVisitTime;
     });
   }
 }

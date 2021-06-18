@@ -14,6 +14,9 @@ import { HouseCardComponent } from './components/house-card/house-card.component
 import { HouseCarouselComponent } from './components/house-carousel/house-carousel.component';
 import { RouteAComponent } from './components/route-a/route-a.component';
 import { RouteBComponent } from './components/route-b/route-b.component';
+import { HouseControlPanelComponent } from './components/house-control-panel/house-control-panel.component';
+import { HouseFormComponent } from './components/house-form/house-form.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +30,13 @@ import { RouteBComponent } from './components/route-b/route-b.component';
     HouseCardComponent,
     HouseCarouselComponent,
     RouteAComponent,
-    RouteBComponent
+    RouteBComponent,
+    HouseControlPanelComponent,
+    HouseFormComponent,
+    CategoryFormComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

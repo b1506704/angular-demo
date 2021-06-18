@@ -15,7 +15,13 @@
         <p class="card-text">Front: {{ item.front }}</p>
         <p class="card-text">Addess: {{ item.address }}</p>
         <p class="card-text">Direction: {{ item.direction }}</p>
-        <a class="btn btn-primary" (click)="selectHouse(item)">Detail</a>
+        <div class="btn-group shadow-lg">
+          <button class="btn btn-primary" (click)="selectHouse(item)">
+            Detail
+          </button>
+          <button class="btn btn-primary">Delete</button>
+          <button class="btn btn-primary">Update</button>
+        </div>
       </div>
     </div>
   </div>
