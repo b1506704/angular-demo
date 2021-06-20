@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { House } from '../models/house.model';
 import { StateService } from '../shared/state.service';
-import { FetchHouseService } from './fetch-house.service';
+import { FetchHouseService } from './http-request.service';
 
 interface HouseState {
   houseList: Array<House>;
@@ -103,6 +103,39 @@ export class StoreService extends StateService<HouseState> {
       },
     });
   }
+
+  uploadHouse(house: House){
+    this.setIsLoading(true);
+    this.apiService.uploadHouse(house).subscribe({
+      next: (data: any) => {
+        this.setState({ createdHouse: data });
+        console.log(data);
+      },
+      complete: () => {
+        if (this.checkIsLoading() === true) {
+          this.setIsLoading(false);
+          this.loadDataAsync();
+        }
+      },
+    });
+  }
+  
+  deleteHouse(house: House){
+    this.setIsLoading(true);
+    this.apiService.deleteHouse(house).subscribe({
+      next: (data: any) => {
+        this.setState({ deletedHouse: data });
+        console.log(data);
+      },
+      complete: () => {
+        if (this.checkIsLoading() === true) {
+          this.setIsLoading(false);
+          this.loadDataAsync();
+        }
+      },
+    });
+  } 
+
 
   selectHouse(_house: House) {
     this.setState({ selectedHouse: _house.id });

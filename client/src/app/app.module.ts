@@ -17,6 +17,7 @@ import { RouteBComponent } from './components/route-b/route-b.component';
 import { HouseControlPanelComponent } from './components/house-control-panel/house-control-panel.component';
 import { HouseFormComponent } from './components/house-form/house-form.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     HouseFormComponent,
     CategoryFormComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

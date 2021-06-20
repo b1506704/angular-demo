@@ -28,30 +28,40 @@ export class FetchHouseService {
   }
 
   fetchHouse(): Observable<House> {
-    return (
-      this.http
-        .get<House>(this.apiHouseUrl, {
-          reportProgress: true,
-          observe: 'body',
-        })
-        // insert fetchCategory in this pipe for promise-chaining-like mechanism ?
-        .pipe(
-          catchError(this.handleError)
-          )
-    );
+    return this.http
+      .get<House>(this.apiHouseUrl, {
+        reportProgress: true,
+        observe: 'body',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  uploadHouse(house: House): Observable<House> {
+    return this.http
+      .post<House>(this.apiHouseUrl, house, {
+        reportProgress: true,
+        observe: 'body',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteHouse(house: House): Observable<ArrayBuffer> {
+    return this.http
+      .delete<ArrayBuffer>(this.apiHouseUrl + `/${house.id}`, {
+        reportProgress: true,
+        observe: 'body',
+      })
+      .pipe(catchError(this.handleError));
   }
 
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Get client-side error
       errorMessage = error.error.message;
     } else {
-      // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
     console.log(errorMessage);
-    // window.alert(errorMessage);
     return throwError(errorMessage);
   }
 }

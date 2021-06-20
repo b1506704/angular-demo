@@ -1,19 +1,63 @@
-<div class="container-fluid">
-  <form class="container-fluid">
-    <h2>Insert Category</h2>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" />
-    </div>
-    <div class="form-group">
-      <label for="img">Select image</label>
-      <input class="form-control" type="file" id="img" />
-    </div>
-    <button
-      type="submit"
-      class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+<div class="container-fluid row">
+  <div class="col">
+    <form
+      class="container-fluid"
+      [formGroup]="categoryForm"
+      (ngSubmit)="onSubmit()"
     >
-      Submit
-    </button>
-  </form>
+      <h2 class="text-center">Insert Category</h2>
+      <div class="form-group">
+        <label for="message">Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="img">Select image</label>
+        <input
+          class="form-control"
+          type="file"
+          id="img"
+          accept="image/*"
+          (change)="handleInputChange($event)"
+        />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary w-100 rounded-3 shadow-lg"
+        (click)="resetField()"
+      >
+        Reset
+      </button>
+    </form>
+  </div>
+  <div
+    class="col d-flex flex-column align-items-center justify-items-center"
+  >
+    <h2>Preview</h2>
+    <div class="card mt-2 rounded-3 border-5 shadow-lg" style="width: 18rem">
+      <img [src]="imgUrl" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ categoryForm.value.name }}</h5>
+      </div>
+    </div>
+    <div
+      [ngClass]="{
+        '': isChecking === false,
+        'spinner-border text-primary ': isChecking === true
+      }"
+      role="status"
+    ></div>
+    <p>Status: {{ categoryForm.status}}</p>
+  </div>
 </div>

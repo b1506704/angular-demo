@@ -1,23 +1,41 @@
-<nav class="navbar nav-tabs d-flex sticky-md-top bg-dark p-0 shadow border-0">
-  <h2 class="text-light m-0">Angular Demo</h2>
-  <div class="nav flex-row">
-    <a
-      class="text-sm-center nav-link"
-      [routerLink]="['/home']"
-      routerLinkActive="active"
-      >Home</a
-    >
-    <a
-      class="text-sm-center nav-link"
-      [routerLink]="['/houses']"
-      routerLinkActive="active"
-      >House</a
-    >
-    <a
-      class="text-sm-center nav-link"
-      [routerLink]="['/posts']"
-      routerLinkActive="active"
-      >Posts</a
-    >
-  </div>
-</nav>
+<div class="sticky-md-top">
+  <nav class="navbar nav-tabs d-flex bg-dark p-0 shadow border-0">
+    <h2 class="text-light m-0 px-3">Angular Demo</h2>
+    <div class="nav flex-row">
+      <a
+        class="text-sm-center nav-link"
+        [routerLink]="['/home']"
+        routerLinkActive="active"
+        >Home</a
+      >
+      <a
+        class="text-sm-center nav-link"
+        [routerLink]="['/houses']"
+        routerLinkActive="active"
+        >House</a
+      >
+      <a
+        class="text-sm-center nav-link"
+        [routerLink]="['/posts']"
+        routerLinkActive="active"
+        >Posts</a
+      >
+    </div>
+  </nav>
+  <ng-container *ngIf="isLoading$ | async as isLoading">
+    <div class="progress">
+      <div
+        [ngClass]="{
+          'd-none': isLoading === false,
+          'progress-bar progress-bar-striped progress-bar-animated':
+            isLoading === true
+        }"
+        role="progressbar"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: 100%"
+      ></div>
+    </div>
+  </ng-container>
+</div>

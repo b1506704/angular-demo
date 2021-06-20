@@ -10,16 +10,17 @@
       <div class="card-body">
         <h5 class="card-title">{{ item.message }}</h5>
         <p class="card-text">ID: {{ item.id }}</p>
+        <p class="card-text">Price: {{ item.price }} Tỷ</p>
         <p class="card-text">Category: {{ item.category }}</p>
-        <p class="card-text">Area: {{ item.area }}</p>
-        <p class="card-text">Front: {{ item.front }}</p>
+        <p class="card-text">Area: {{ item.area }} M2</p>
+        <p class="card-text">Front: {{ item.front }} M2</p>
         <p class="card-text">Addess: {{ item.address }}</p>
         <p class="card-text">Direction: {{ item.direction }}</p>
         <div class="btn-group shadow-lg">
           <button class="btn btn-primary" (click)="selectHouse(item)">
             Detail
           </button>
-          <button class="btn btn-primary">Delete</button>
+          <button class="btn btn-primary" (click)="deleteHouse(item)">Delete</button>
           <button class="btn btn-primary">Update</button>
         </div>
       </div>
