@@ -105,7 +105,10 @@
           </button>
         </div>
         <div class="col">
-          <app-house-form *ngIf="isHouseFormShow" [category]="category"></app-house-form>
+          <app-house-form
+            *ngIf="isHouseFormShow"
+            [category]="category"
+          ></app-house-form>
           <app-category-form *ngIf="isCategoryFormShow"></app-category-form>
         </div>
       </div>

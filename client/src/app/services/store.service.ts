@@ -15,7 +15,7 @@ interface HouseState {
   deletedHouse: Object;
   filteredHouseList: Array<House>;
   isLoading: Boolean;
-  lastVisitTime: Date; 
+  lastVisitTime: Date;
 }
 const initialState: HouseState = {
   houseList: [],
@@ -25,7 +25,7 @@ const initialState: HouseState = {
   deletedHouse: {},
   filteredHouseList: [],
   isLoading: false,
-  lastVisitTime: new Date(0,0,0,0)
+  lastVisitTime: new Date(0, 0, 0, 0),
 };
 @Injectable({
   providedIn: 'root',
@@ -33,13 +33,34 @@ const initialState: HouseState = {
 export class StoreService extends StateService<HouseState> {
   constructor(private apiService: FetchHouseService) {
     super(initialState);
-    this.loadData();
+
+    // api called synchronously
+    // this.loadData();
+
+    // api called asynchronously
+    this.loadDataAsync();
   }
   // state Observable for subscribers and get state data
   $state: Observable<HouseState> = this.select((state) => state);
 
+  $isLoading: Observable<Boolean> = this.select((state) => state.isLoading);
+
+  $houseList: Observable<Array<House>> = this.select(
+    (state) => state.houseList
+  );
+
+  $categoryList: Observable<Array<Category>> = this.select(
+    (state) => state.categoryList
+  );
+
   setIsLoading(_isLoading: Boolean) {
     this.setState({ isLoading: _isLoading });
+  }
+
+  checkIsLoading(): Boolean {
+    let isLoading = false;
+    this.$isLoading.subscribe((data: any) => (isLoading = data));
+    return isLoading;
   }
 
   loadData() {
@@ -47,26 +68,40 @@ export class StoreService extends StateService<HouseState> {
     this.setIsLoading(true);
     this.apiService.fetchHouse().subscribe((data: any) => {
       this.setState({ houseList: data });
+      console.log(data);
       this.apiService.fetchCategory().subscribe((data: any) => {
         this.setState({ categoryList: data });
+        this.setIsLoading(false);
+        console.log(data);
       });
-      this.setIsLoading(false);
     });
-    
-    // below functions run asynchronously
-    // ==> fetch data asynchronously
-    // ==> cant control when to setIsLoading false
-    // ==> setIsLoading(false) is set before api calls complete 
-    // how to wait for both api calls complete then setIsLoading(false) ?
-    
-    // this.setIsLoading(true);
-    // this.apiService.fetchCategory().subscribe((data: any) => {
-    //   this.setState({ categoryList: data });
-    // });
-    // this.apiService.fetchHouse().subscribe((data: any) => {
-    //   this.setState({ houseList: data });
-    // });
-    // this.setIsLoading(false);
+  }
+
+  loadDataAsync() {
+    this.setIsLoading(true);
+    const fetchCategory = this.apiService.fetchCategory().subscribe({
+      next: (data: any) => {
+        this.setState({ categoryList: data });
+        console.log(data);
+      },
+      complete: () => {
+        if (this.checkIsLoading() === true && fetchHouse.closed === true) {
+          this.setIsLoading(false);
+        }
+      },
+    });
+
+    const fetchHouse = this.apiService.fetchHouse().subscribe({
+      next: (data: any) => {
+        this.setState({ houseList: data });
+        console.log(data);
+      },
+      complete: () => {
+        if (this.checkIsLoading() === true && fetchCategory.closed === true) {
+          this.setIsLoading(false);
+        }
+      },
+    });
   }
 
   selectHouse(_house: House) {

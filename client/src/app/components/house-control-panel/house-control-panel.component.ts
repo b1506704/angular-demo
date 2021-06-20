@@ -7,7 +7,7 @@ import { Category } from 'src/app/models/category.model';
   styleUrls: ['./house-control-panel.component.css'],
 })
 export class HouseControlPanelComponent implements OnInit {
-  @Input() category: Array<Category> = [];
+  @Input() category!: Array<Category>;
 
   isHouseFormShow: Boolean = false;
   isCategoryFormShow: Boolean = false;

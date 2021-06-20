@@ -11,14 +11,13 @@ import { House } from '../models/house.model';
 export class FetchHouseService {
   apiHouseUrl = 'https://real-estate-shop.herokuapp.com/houses';
   apiCategoryUrl = 'https://real-estate-shop.herokuapp.com/categories';
-  
   // httpOptions = {
   //   headers: new HttpHeaders({
   //     'Content-Type': 'application/json'
   //   })
   // }
   constructor(private http: HttpClient) {}
-  
+
   fetchCategory(): Observable<Category> {
     return this.http
       .get<Category>(this.apiCategoryUrl, {
@@ -27,15 +26,19 @@ export class FetchHouseService {
       })
       .pipe(catchError(this.handleError));
   }
-  
+
   fetchHouse(): Observable<House> {
-    return this.http
-      .get<House>(this.apiHouseUrl, {
-        reportProgress: true,
-        observe: 'body',
-      })
-      // insert fetchCategory in this pipe for promise-chaining-like mechanism ?
-      .pipe(catchError(this.handleError));
+    return (
+      this.http
+        .get<House>(this.apiHouseUrl, {
+          reportProgress: true,
+          observe: 'body',
+        })
+        // insert fetchCategory in this pipe for promise-chaining-like mechanism ?
+        .pipe(
+          catchError(this.handleError)
+          )
+    );
   }
 
   handleError(error: any) {

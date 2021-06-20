@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { House } from 'src/app/models/house.model';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -6,17 +7,11 @@ import { StoreService } from 'src/app/services/store.service';
   selector: 'app-house-carousel',
   templateUrl: './house-carousel.component.html',
   styleUrls: ['./house-carousel.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HouseCarouselComponent implements OnInit {
-  house: Array<House> = [];
-  constructor(private store: StoreService) { }
+  constructor(private store: StoreService) {}
 
-  ngOnInit(): void {
-    // get data from store, instead of parent component
-    this.store.$state.subscribe((state) => {
-      this.house = state.houseList;
-    })
-  }
+  houseList$: Observable<Array<House>> = this.store.$houseList;
 
+  ngOnInit(): void {}
 }

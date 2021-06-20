@@ -1,28 +1,26 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  // does not rerender template with this
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   title = 'angular-demo';
-  // universal loading value
-  // does not change when changeDetection onPush ?
-  isLoading: Boolean = false;
+  
+  constructor(private store: StoreService, private cdf: ChangeDetectorRef) {}
 
-  constructor(private store: StoreService) {}
+  isLoading$: Observable<Boolean> = this.store.$isLoading;
   
   ngOnInit() {
-    // call store loadData function
-    // this.store.loadData();
+      // this.cdf.markForCheck();
     // subscribe to state Observable then set isLoading value
-    this.store.$state.subscribe((state: any) => {
-      this.isLoading = state.isLoading;
-      console.log(state);
-    });
+    // this.store.$state.subscribe((state: any) => {
+    //   this.isLoading = state.isLoading;
+    //   console.log(state);
+    // });
   }
 }
