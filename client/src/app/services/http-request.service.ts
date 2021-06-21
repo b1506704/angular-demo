@@ -54,6 +54,15 @@ export class FetchHouseService {
       .pipe(catchError(this.handleError));
   }
 
+  updateHouse(house: House): Observable<House> {
+    return this.http
+      .post<House>(this.apiHouseUrl + `/updateHouse/${house.id}`, house, {
+        reportProgress: true,
+        observe: 'body',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

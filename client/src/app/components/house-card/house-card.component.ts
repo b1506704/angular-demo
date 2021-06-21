@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 import { House } from 'src/app/models/house.model';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -10,14 +12,32 @@ import { StoreService } from 'src/app/services/store.service';
 export class HouseCardComponent implements OnInit {
   // data from parent component
   @Input() house: Array<House> = [];
-  constructor(private store: StoreService) {}
+  constructor(private store: StoreService, private md: NgbModal) {}
   // set selectedHouse in store
+  $mdObs: Observable<TemplateRef<any>> = this.store.$modalRef;
   selectHouse(house: House) {
     this.store.selectHouse(house);
   }
 
   deleteHouse(house: House) {
     this.store.deleteHouse(house);
+  }
+
+  triggerModal(content: any) {
+    this.md.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
+      backdrop: 'static',
+      keyboard: true,
+    });
+  }
+  updateHouse(house: House) {
+    this.store.selectHouse(house);
+    this.$mdObs
+      .subscribe((data: any) => {
+        this.triggerModal(data);
+      })
+      .unsubscribe();
   }
 
   ngOnInit(): void {}

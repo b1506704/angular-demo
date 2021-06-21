@@ -18,6 +18,7 @@ import { HouseControlPanelComponent } from './components/house-control-panel/hou
 import { HouseFormComponent } from './components/house-form/house-form.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalUpdateComponent } from './components/modal-update/modal-update.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HouseControlPanelComponent,
     HouseFormComponent,
     CategoryFormComponent,
+    ModalUpdateComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [],

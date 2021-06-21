@@ -8,7 +8,7 @@
         </div>
     </div>
     <router-outlet></router-outlet>
-    <h2 class="my-3">Selected House: {{selectedHouse}}</h2>
+    <h2 class="my-3">Selected House: {{selectedHouse ? selectedHouse.id : null}}</h2>
     <p class="text-body">Someone has just left House route since: {{houseVisitTime}}  </p>
     <!-- <app-route-a (messageEvent)="setMsgFromChild($event)"></app-route-a> -->
     <!-- <h2>Value from child: {{msgFromChild}}</h2> -->
