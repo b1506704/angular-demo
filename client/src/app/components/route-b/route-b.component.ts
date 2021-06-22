@@ -11,7 +11,7 @@ export class RouteBComponent implements OnInit {
   constructor(private store: StoreService) { }
 
   fetchFromStore() {
-    this.store.loadData();
+    this.store.loadDataAsync();
   }
 
   ngOnInit(): void {

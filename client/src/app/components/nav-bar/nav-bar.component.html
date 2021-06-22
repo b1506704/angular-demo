@@ -1,21 +1,31 @@
 <div class="sticky-md-top">
-  <nav class="navbar nav-tabs d-flex bg-dark p-0 shadow border-0">
-    <h2 class="text-light m-0 px-3">Angular Demo</h2>
+  <nav
+    class="navbar nav-tabs d-flex p-0 shadow-lg border-0 p-0"
+    style="
+      background-color: rgba(83, 110, 182, 0.39);
+      color: white;
+      height: 50px;
+      backdrop-filter: blur(5px);
+    "
+    appThemeModify 
+    textColor="black"
+  >
+    <h2 class="text-dark m-0 px-3">Angular Demo</h2>
     <div class="nav flex-row">
       <a
-        class="text-sm-center nav-link"
+        class="text-sm-center nav-link text-dark"
         [routerLink]="['/home']"
         routerLinkActive="active"
         >Home</a
       >
       <a
-        class="text-sm-center nav-link"
+        class="text-sm-center nav-link text-dark"
         [routerLink]="['/houses']"
         routerLinkActive="active"
         >House</a
       >
       <a
-        class="text-sm-center nav-link"
+        class="text-sm-center nav-link text-dark"
         [routerLink]="['/posts']"
         routerLinkActive="active"
         >Posts</a

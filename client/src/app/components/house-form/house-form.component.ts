@@ -19,6 +19,7 @@ export class HouseFormComponent implements OnInit {
   onSubmit() {
     // console.log(JSON.stringify(this.houseForm.value));
     this.store.uploadHouse(this.houseForm.value);
+    this.resetField();
   }
 
   resetField() {

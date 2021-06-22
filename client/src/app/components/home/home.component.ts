@@ -26,13 +26,26 @@ export class HomeComponent implements OnInit {
   setMsgFromChild(msg: string) {
     this.msgFromChild = msg;
   }
+
+  setWhiteBg() {
+    this.store.setBackgroundColor('white');
+  }
+
+  setDarkBg() {
+    this.store.setBackgroundColor('black');
+  }
+
+  setCustomBg(color: any) {
+    this.store.setBackgroundColor(color);
+  }
+
   ngOnInit(): void {
     // example of ActivatedRoute Observable
     this.route.url.subscribe((url) => console.log('Current route: ' + url));
-    this.store.$state.subscribe((state:any) => {
+    this.store.$state.subscribe((state: any) => {
       this.selectedHouse = state.selectedHouse;
       this.houseVisitTime = state.lastVisitTime;
     });
   }
-  // unsubscribe observable 
+  // unsubscribe observable
 }

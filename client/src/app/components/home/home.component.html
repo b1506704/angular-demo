@@ -1,15 +1,31 @@
-<div class="container-fluid bg-light flex-row align-content-center justify-content-start">
-    <div class="flex-row">
-        <div class="col mt-1">
-            <button class="btn btn-primary shadow" (click)="subRouteA()">Route A</button>
-        </div>
-        <div class="col mt-1">
-            <button class="btn btn-dark shadow" (click)="subRouteB()">Route B</button>
-        </div>
+<div
+  class="
+    container-fluid
+    bg-light
+    flex-row
+    align-content-center
+    justify-content-start
+  "
+>
+  <div class="flex-row">
+    <div class="col mt-1">
+      <button class="btn btn-primary shadow" (click)="subRouteA()">
+        Route A
+      </button>
     </div>
-    <router-outlet></router-outlet>
-    <h2 class="my-3">Selected House: {{selectedHouse ? selectedHouse.id : null}}</h2>
-    <p class="text-body">Someone has just left House route since: {{houseVisitTime}}  </p>
-    <!-- <app-route-a (messageEvent)="setMsgFromChild($event)"></app-route-a> -->
-    <!-- <h2>Value from child: {{msgFromChild}}</h2> -->
+    <div class="col mt-1">
+      <button class="btn btn-dark shadow" (click)="subRouteB()">Route B</button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <h2 class="my-3">
+    Selected House: {{ selectedHouse ? selectedHouse.id : null }}
+  </h2>
+  <p class="text-body">
+    Someone has just left House route since: {{ houseVisitTime }}
+  </p>
+  <button class="btn btn-dark shadow" (click)="setWhiteBg()">Set White Background</button>
+  <button class="btn btn-dark shadow" (click)="setDarkBg()">Set Dark Background</button>
+  <!-- <app-route-a (messageEvent)="setMsgFromChild($event)"></app-route-a> -->
+  <!-- <h2>Value from child: {{msgFromChild}}</h2> -->
 </div>

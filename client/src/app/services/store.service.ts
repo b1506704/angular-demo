@@ -4,6 +4,7 @@ import { Category } from '../models/category.model';
 import { House } from '../models/house.model';
 import { StateService } from '../shared/state.service';
 import { FetchHouseService } from './http-request.service';
+import { NotificationService } from './notification.service';
 
 interface HouseState {
   houseList: Array<House>;
@@ -16,6 +17,7 @@ interface HouseState {
   isLoading: Boolean;
   lastVisitTime: Date;
   toggleUpdateForm?: TemplateRef<any>;
+  backgroundColor: any;
 }
 const initialState: HouseState = {
   houseList: [],
@@ -28,12 +30,16 @@ const initialState: HouseState = {
   isLoading: false,
   lastVisitTime: new Date(0, 0, 0, 0),
   toggleUpdateForm: undefined,
+  backgroundColor: undefined
 };
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService extends StateService<HouseState> {
-  constructor(private apiService: FetchHouseService) {
+  constructor(
+    private apiService: FetchHouseService,
+    private notifService: NotificationService,
+  ) {
     super(initialState);
 
     // api called synchronously
@@ -47,10 +53,16 @@ export class StoreService extends StateService<HouseState> {
 
   $isLoading: Observable<Boolean> = this.select((state) => state.isLoading);
 
-  $selectedHouse: Observable<Object> = this.select((state) => state.selectedHouse);
+  $selectedHouse: Observable<Object> = this.select(
+    (state) => state.selectedHouse
+  );
 
   $houseList: Observable<Array<House>> = this.select(
     (state) => state.houseList
+  );
+
+  $backgroundColor: Observable<any> = this.select(
+    (state) => state.backgroundColor
   );
 
   $categoryList: Observable<Array<Category>> = this.select(
@@ -98,6 +110,7 @@ export class StoreService extends StateService<HouseState> {
       complete: () => {
         if (this.checkIsLoading() === true && fetchHouse.closed === true) {
           this.setIsLoading(false);
+          this.showNotifSuccess('Load data successfully!');
         }
       },
     });
@@ -110,6 +123,7 @@ export class StoreService extends StateService<HouseState> {
       complete: () => {
         if (this.checkIsLoading() === true && fetchCategory.closed === true) {
           this.setIsLoading(false);
+          this.showNotifSuccess('Load data successfully!');
         }
       },
     });
@@ -126,6 +140,7 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.showNotifSuccess(`House ${house.id} uploaded!`);
         }
       },
     });
@@ -142,6 +157,7 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.showNotifSuccess(`House ${house.id} updated!`);
         }
       },
     });
@@ -158,6 +174,7 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.showNotifSuccess(`House ${house.id} deleted!`);
         }
       },
     });
@@ -173,5 +190,29 @@ export class StoreService extends StateService<HouseState> {
 
   filterHouse(_houseList: Array<House>) {
     this.setState({ filteredHouseList: _houseList });
+  }
+
+  showNotifSuccess(msg: any) {
+    this.notifService.showNotif(msg, {
+      delay: 3500,
+    });
+  }
+
+  showNotifError(msg: any) {
+    this.notifService.showNotif(msg, {
+      classname: 'bg-danger text-light shadow-lg',
+      delay: 3500,
+    });
+  }
+
+  showNotifWithTemplate(templateRef: any) {
+    this.notifService.showNotif(templateRef, {
+      classname: 'bg-danger text-light shadow-lg',
+      delay: 3500,
+    });
+  }
+
+  setBackgroundColor(color: any) {
+    this.setState({backgroundColor: color});
   }
 }

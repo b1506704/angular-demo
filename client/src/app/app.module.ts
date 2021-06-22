@@ -19,6 +19,9 @@ import { HouseFormComponent } from './components/house-form/house-form.component
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalUpdateComponent } from './components/modal-update/modal-update.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ThemeModifyDirective } from './directives/theme-modify.directive';
 
 @NgModule({
   declarations: [
@@ -37,8 +40,10 @@ import { ModalUpdateComponent } from './components/modal-update/modal-update.com
     HouseFormComponent,
     CategoryFormComponent,
     ModalUpdateComponent,
+    NotificationComponent,
+    ThemeModifyDirective,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent],
 })
