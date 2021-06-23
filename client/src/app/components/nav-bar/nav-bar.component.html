@@ -7,28 +7,27 @@
       height: 50px;
       backdrop-filter: blur(5px);
     "
-    appThemeModify 
-    textColor="black"
+    appThemeModify
   >
-    <h2 class="text-dark m-0 px-3">Angular Demo</h2>
+    <h2 class="m-0 px-3">Angular Demo</h2>
     <div class="nav flex-row">
       <a
-        class="text-sm-center nav-link text-dark"
+        class="text-sm-center nav-link"
         [routerLink]="['/home']"
         routerLinkActive="active"
         >Home</a
       >
       <a
-        class="text-sm-center nav-link text-dark"
+        class="text-sm-center nav-link"
         [routerLink]="['/houses']"
         routerLinkActive="active"
         >House</a
       >
       <a
-        class="text-sm-center nav-link text-dark"
-        [routerLink]="['/posts']"
+        class="text-sm-center nav-link"
+        [routerLink]="['/theme']"
         routerLinkActive="active"
-        >Posts</a
+        >Theme</a
       >
     </div>
   </nav>

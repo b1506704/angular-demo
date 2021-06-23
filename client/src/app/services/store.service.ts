@@ -15,9 +15,11 @@ interface HouseState {
   updatedHouse: Object;
   filteredHouseList: Array<House>;
   isLoading: Boolean;
+  isFiltering: Boolean;
   lastVisitTime: Date;
   toggleUpdateForm?: TemplateRef<any>;
   backgroundColor: any;
+  textColor: any;
 }
 const initialState: HouseState = {
   houseList: [],
@@ -28,9 +30,11 @@ const initialState: HouseState = {
   updatedHouse: {},
   filteredHouseList: [],
   isLoading: false,
+  isFiltering: false,
   lastVisitTime: new Date(0, 0, 0, 0),
   toggleUpdateForm: undefined,
-  backgroundColor: undefined
+  backgroundColor: undefined,
+  textColor: undefined
 };
 @Injectable({
   providedIn: 'root',
@@ -53,6 +57,8 @@ export class StoreService extends StateService<HouseState> {
 
   $isLoading: Observable<Boolean> = this.select((state) => state.isLoading);
 
+  $isFiltering: Observable<Boolean> = this.select((state) => state.isFiltering);
+
   $selectedHouse: Observable<Object> = this.select(
     (state) => state.selectedHouse
   );
@@ -61,8 +67,16 @@ export class StoreService extends StateService<HouseState> {
     (state) => state.houseList
   );
 
+  $filteredHouseList: Observable<Array<House>> = this.select(
+    (state) => state.filteredHouseList
+  );
+
   $backgroundColor: Observable<any> = this.select(
     (state) => state.backgroundColor
+  );
+
+  $textColor: Observable<any> = this.select(
+    (state) => state.textColor
   );
 
   $categoryList: Observable<Array<Category>> = this.select(
@@ -73,6 +87,10 @@ export class StoreService extends StateService<HouseState> {
 
   setIsLoading(_isLoading: Boolean) {
     this.setState({ isLoading: _isLoading });
+  }
+
+  setIsFiltering(_isFiltering: Boolean) {
+    this.setState({ isFiltering: _isFiltering });
   }
 
   checkIsLoading(): Boolean {
@@ -188,8 +206,9 @@ export class StoreService extends StateService<HouseState> {
     this.setState({ lastVisitTime: _date });
   }
 
-  filterHouse(_houseList: Array<House>) {
+  filterHouse(_houseList: Array<House>, _criteria: string) {
     this.setState({ filteredHouseList: _houseList });
+    this.showNotifSuccess(`Filter with ${_criteria}`);
   }
 
   showNotifSuccess(msg: any) {
@@ -214,5 +233,11 @@ export class StoreService extends StateService<HouseState> {
 
   setBackgroundColor(color: any) {
     this.setState({backgroundColor: color});
+    this.showNotifSuccess(`Set background color to ${color}`);
+  }
+
+  setTextColor(color: any) {
+    this.setState({textColor: color});
+    this.showNotifSuccess(`Set text color to ${color}`);
   }
 }

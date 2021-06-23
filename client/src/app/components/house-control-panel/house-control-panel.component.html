@@ -22,7 +22,7 @@
       aria-labelledby="flush-headingOne"
       data-bs-parent="#accordionFlushExample"
     >
-      <div
+      <form
         class="
           accordion-body
           d-flex
@@ -30,6 +30,8 @@
           justify-content-evenly
           align-content-center
         "
+        [formGroup]="filterForm"
+        (ngSubmit)="onSubmit()"
       >
         <h4>Filter: Area</h4>
         <div class="form-check form-switch">
@@ -53,6 +55,7 @@
         <select
           class="form-select form-select-sm"
           aria-label="Default select example"
+          formControlName="category"
         >
           <option
             selected
@@ -62,10 +65,20 @@
             {{ item.name }}
           </option>
         </select>
-        <button class="btn btn-primary shadow-lg rounded-3 my-3">
+        <button
+          type="submit"
+          class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary shadow-lg rounded-3 my-3"
+          (click)="onReset()"
+        >
           Reset Filter
         </button>
-      </div>
+      </form>
     </div>
   </div>
   <div class="accordion-item">

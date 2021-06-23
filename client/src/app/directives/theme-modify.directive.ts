@@ -1,16 +1,34 @@
 import { Directive, ElementRef, Input } from '@angular/core';
+import { StoreService } from '../services/store.service';
 
 @Directive({
   selector: '[appThemeModify]',
 })
 export class ThemeModifyDirective {
-  @Input() textColor!: string;
-  @Input() backgroundColor!: string;
-  constructor(private elRef: ElementRef) {}
+  @Input() txtColor!: string;
+  @Input() bgColor!: string;
+  constructor(private elRef: ElementRef, private store: StoreService) {}
+
+  renderWithInput() {
+    //render if input is provided
+    if (this.txtColor) {
+      this.elRef.nativeElement.style.textColor = this.txtColor;
+    }
+    if (this.bgColor) {
+      this.elRef.nativeElement.style.bgColor = this.bgColor;
+    }
+  }
+
+  renderWithObservable() {
+    this.store.$backgroundColor.subscribe((data: any) => {
+      this.elRef.nativeElement.style.backgroundColor = data;
+    });
+    this.store.$textColor.subscribe((data: any) => {
+      this.elRef.nativeElement.style.color = data;
+    });
+  }
   ngAfterViewInit(): void {
-    this.textColor = this.textColor || 'black';
-    this.backgroundColor = this.backgroundColor || 'rgba(83, 110, 182, 0.39)';
-    this.elRef.nativeElement.style.color = this.textColor;
-    this.elRef.nativeElement.style.backgroundColor = this.backgroundColor;
+    this.renderWithInput();
+    this.renderWithObservable();
   }
 }

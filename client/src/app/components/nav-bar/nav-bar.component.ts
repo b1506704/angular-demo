@@ -9,12 +9,6 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class NavBarComponent implements OnInit {
   constructor(private store: StoreService) {}
-  backgroundColor: string = '';
   isLoading$: Observable<Boolean> = this.store.$isLoading;
-  ngOnInit(): void {
-    // need rework
-    this.store.$backgroundColor.subscribe((data: any) => {
-      this.backgroundColor = data;
-    })
-  }
+  ngOnInit(): void {}
 }

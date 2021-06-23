@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreatePostComponent } from './components/create-post/create-post.component';
 import { HomeComponent } from './components/home/home.component';
 import { HouseComponent } from './components/house/house.component';
-import { PostsComponent } from './components/posts/posts.component';
 import { RouteAComponent } from './components/route-a/route-a.component';
 import { RouteBComponent } from './components/route-b/route-b.component';
+import { ThemeComponent } from './components/theme/theme.component';
 
 const routes: Routes = [
   {
@@ -21,12 +20,8 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'posts',
-    component: PostsComponent,
-    children: [
-      { path: '', component: PostsComponent },
-      { path: 'create_post', component: CreatePostComponent },
-    ],
+    path: 'theme',
+    component: ThemeComponent,
   },
 ];
 
@@ -35,10 +30,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-// export const ArrayOfComponents = [
-//   HomeComponent,
-//   HouseComponent,
-//   PostsComponent,
-//   RouteAComponent,
-//   RouteBComponent,
-// ];
