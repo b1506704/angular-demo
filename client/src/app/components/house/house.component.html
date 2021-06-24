@@ -6,8 +6,7 @@
   <ng-container *ngIf="houseList$ | async as house">
     <app-house-card [house]="house"></app-house-card>
   </ng-container>
-  <!-- second child but get value from store instead -->
+  <!-- second child but get value from store instead, indepent of filter/search... -->
   <app-house-carousel></app-house-carousel>
   <app-modal-update></app-modal-update>
 </div>
-

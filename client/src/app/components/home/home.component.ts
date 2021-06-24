@@ -27,18 +27,6 @@ export class HomeComponent implements OnInit {
     this.msgFromChild = msg;
   }
 
-  setWhiteBg() {
-    this.store.setBackgroundColor('white');
-  }
-
-  setDarkBg() {
-    this.store.setBackgroundColor('black');
-  }
-
-  setCustomBg(color: any) {
-    this.store.setBackgroundColor(color);
-  }
-
   ngOnInit(): void {
     // example of ActivatedRoute Observable
     this.route.url.subscribe((url) => console.log('Current route: ' + url));

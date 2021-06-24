@@ -12,14 +12,15 @@ import { StoreService } from 'src/app/services/store.service';
 export class HouseComponent implements OnInit {
   date: Date = new Date();
   isFiltering: Boolean = false;
+  isSearching: Boolean = false;
 
   constructor(private store: StoreService) {}
-  
+
   houseList$: Observable<Array<House>> = this.store.$houseList;
   categoryList$: Observable<Array<Category>> = this.store.$categoryList;
 
-  ngOnInit(): void {
-    this.store.$isFiltering.subscribe((data: any) => {
+  filterListener() {
+    const filterObs$ = this.store.$isFiltering.subscribe((data: any) => {
       this.isFiltering = data;
       if (this.isFiltering === true) {
         this.houseList$ = this.store.$filteredHouseList;
@@ -27,9 +28,29 @@ export class HouseComponent implements OnInit {
         this.houseList$ = this.store.$houseList;
       }
     });
+    return filterObs$;
+  }
+
+  searchListener() {
+    const searchObs$ = this.store.$isSearching.subscribe((data: any) => {
+      this.isSearching = data;
+      if (this.isSearching === true) {
+        this.houseList$ = this.store.$searchedHouseList;
+      } else {
+        this.houseList$ = this.store.$houseList;
+      }
+    });
+    return searchObs$;
+  }
+
+  ngOnInit(): void {
+    this.searchListener();
+    this.filterListener();
   }
 
   ngOnDestroy(): void {
+    this.searchListener().unsubscribe();
+    this.filterListener().unsubscribe();
     this.store.setLastVisit(this.date);
   }
 }

@@ -34,22 +34,37 @@
         (ngSubmit)="onSubmit()"
       >
         <h4>Filter: Area</h4>
+        <!-- todo: set max range dynamically -->
+
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="a_lt1000" />
-          <label class="form-check-label" for="a_lt1000">Area<=1000</label>
-        </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="gt1000" />
-          <label class="form-check-label" for="gt1000">Area>1000</label>
+          <label class="form-check-label" for="gt1000"
+            >Area Greater Than: {{ filterForm.value.gtArea }}
+          </label>
+          <input
+            class="form-range"
+            type="range"
+            id="gt1000"
+            min="0"
+            max="10000"
+            step="10"
+            formControlName="gtArea"
+          />
         </div>
         <h4>Filter: Front</h4>
+
         <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="f_lt1000" />
-          <label class="form-check-label" for="f_lt1000">Front<=1000</label>
-        </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="f_gt1000" />
-          <label class="form-check-label" for="f_gt1000">Front>1000</label>
+          <label class="form-check-label" for="f_gt1000"
+            >Front Greater Than {{ filterForm.value.gtFront }}</label
+          >
+          <input
+            class="form-range"
+            type="range"
+            id="f_gt1000"
+            min="0"
+            max="10000"
+            step="10"
+            formControlName="gtFront"
+          />
         </div>
         <h4>Filter: Category</h4>
         <select
@@ -91,13 +106,67 @@
         aria-expanded="false"
         aria-controls="flush-collapseTwo"
       >
-        Modify Item
+        Search Item
       </button>
     </h2>
     <div
       id="flush-collapseTwo"
       class="accordion-collapse collapse"
       aria-labelledby="flush-headingTwo"
+      data-bs-parent="#accordionFlushExample"
+    >
+      <form
+        class="
+          accordion-body
+          d-flex
+          flex-column
+          justify-content-evenly
+          align-content-center
+        "
+        [formGroup]="searchForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <h4>Search: Message</h4>
+        <div class="input-group">
+          <div class="input-group-append">
+            <button class="btn btn-secondary disabled" disabled type="button">
+              <fa-icon [icon]="faSearch"></fa-icon>
+            </button>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="searchMessage"
+            placeholder="Search house with message"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary shadow-lg rounded-3 my-3"
+          (click)="onReset()"
+        >
+          Reset Filter
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseThree"
+        aria-expanded="false"
+        aria-controls="flush-collapseThree"
+      >
+        Modify Item
+      </button>
+    </h2>
+    <div
+      id="flush-collapseThree"
+      class="accordion-collapse collapse"
+      aria-labelledby="flush-headingThree"
       data-bs-parent="#accordionFlushExample"
     >
       <div class="accordion-body row justify-content-between align-items-start">

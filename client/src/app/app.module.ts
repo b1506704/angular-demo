@@ -21,6 +21,8 @@ import { ModalUpdateComponent } from './components/modal-update/modal-update.com
 import { NotificationComponent } from './components/notification/notification.component';
 import { ThemeModifyDirective } from './directives/theme-modify.directive';
 import { ThemeComponent } from './components/theme/theme.component';
+import { LiveSearchPipe } from './pipes/live-search.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ThemeComponent } from './components/theme/theme.component';
     NotificationComponent,
     ThemeModifyDirective,
     ThemeComponent,
+    LiveSearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { ThemeComponent } from './components/theme/theme.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,8 +14,10 @@ interface HouseState {
   deletedHouse: Object;
   updatedHouse: Object;
   filteredHouseList: Array<House>;
+  searchedHouseList: Array<House>;
   isLoading: Boolean;
   isFiltering: Boolean;
+  isSearching: Boolean;
   lastVisitTime: Date;
   toggleUpdateForm?: TemplateRef<any>;
   backgroundColor: any;
@@ -29,12 +31,14 @@ const initialState: HouseState = {
   deletedHouse: {},
   updatedHouse: {},
   filteredHouseList: [],
+  searchedHouseList: [],
   isLoading: false,
   isFiltering: false,
+  isSearching: false,
   lastVisitTime: new Date(0, 0, 0, 0),
   toggleUpdateForm: undefined,
   backgroundColor: undefined,
-  textColor: undefined
+  textColor: undefined,
 };
 @Injectable({
   providedIn: 'root',
@@ -42,7 +46,7 @@ const initialState: HouseState = {
 export class StoreService extends StateService<HouseState> {
   constructor(
     private apiService: FetchHouseService,
-    private notifService: NotificationService,
+    private notifService: NotificationService
   ) {
     super(initialState);
 
@@ -59,6 +63,8 @@ export class StoreService extends StateService<HouseState> {
 
   $isFiltering: Observable<Boolean> = this.select((state) => state.isFiltering);
 
+  $isSearching: Observable<Boolean> = this.select((state) => state.isSearching);
+
   $selectedHouse: Observable<Object> = this.select(
     (state) => state.selectedHouse
   );
@@ -71,13 +77,15 @@ export class StoreService extends StateService<HouseState> {
     (state) => state.filteredHouseList
   );
 
+  $searchedHouseList: Observable<Array<House>> = this.select(
+    (state) => state.searchedHouseList
+  );
+
   $backgroundColor: Observable<any> = this.select(
     (state) => state.backgroundColor
   );
 
-  $textColor: Observable<any> = this.select(
-    (state) => state.textColor
-  );
+  $textColor: Observable<any> = this.select((state) => state.textColor);
 
   $categoryList: Observable<Array<Category>> = this.select(
     (state) => state.categoryList
@@ -91,6 +99,11 @@ export class StoreService extends StateService<HouseState> {
 
   setIsFiltering(_isFiltering: Boolean) {
     this.setState({ isFiltering: _isFiltering });
+    this.showNotifSuccess(_isFiltering === true ? 'FILTER: ON' : 'FILTER: OFF');
+  }
+
+  setIsSearching(_isSearching: Boolean) {
+    this.setState({ ...this.state, isSearching: _isSearching });
   }
 
   checkIsLoading(): Boolean {
@@ -158,6 +171,8 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.setIsFiltering(false);
+          this.setIsSearching(false);
           this.showNotifSuccess(`House ${house.id} uploaded!`);
         }
       },
@@ -175,6 +190,8 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.setIsFiltering(false);
+          this.setIsSearching(false);
           this.showNotifSuccess(`House ${house.id} updated!`);
         }
       },
@@ -192,6 +209,8 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true) {
           this.setIsLoading(false);
           this.loadDataAsync();
+          this.setIsFiltering(false);
+          this.setIsSearching(false);
           this.showNotifSuccess(`House ${house.id} deleted!`);
         }
       },
@@ -209,6 +228,11 @@ export class StoreService extends StateService<HouseState> {
   filterHouse(_houseList: Array<House>, _criteria: string) {
     this.setState({ filteredHouseList: _houseList });
     this.showNotifSuccess(`Filter with ${_criteria}`);
+  }
+
+  searchHouse(_houseList: Array<House>, _criteria: string) {
+    this.setState({ searchedHouseList: _houseList });
+    // this.showNotifSuccess(`Search with message: '${_criteria}'`);
   }
 
   showNotifSuccess(msg: any) {
@@ -232,12 +256,12 @@ export class StoreService extends StateService<HouseState> {
   }
 
   setBackgroundColor(color: any) {
-    this.setState({backgroundColor: color});
+    this.setState({ backgroundColor: color });
     this.showNotifSuccess(`Set background color to ${color}`);
   }
 
   setTextColor(color: any) {
-    this.setState({textColor: color});
+    this.setState({ textColor: color });
     this.showNotifSuccess(`Set text color to ${color}`);
   }
 }

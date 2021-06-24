@@ -1,6 +1,6 @@
 <div class="container-fluid mt-5">
-  <h2>Carousel View (2nd Child)</h2>
   <ng-container *ngIf="houseList$ | async as house">
+    <h2>Carousel View ({{house.length}}) </h2>
     <div
       id="carouselExampleDark"
       class="carousel carousel-dark slide"

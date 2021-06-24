@@ -15,20 +15,23 @@
         class="text-sm-center nav-link"
         [routerLink]="['/home']"
         routerLinkActive="active"
-        >Home</a
-      >
+        >Home
+        <fa-icon [icon]="faHome"></fa-icon>
+      </a>
       <a
         class="text-sm-center nav-link"
         [routerLink]="['/houses']"
         routerLinkActive="active"
-        >House</a
-      >
+        >House
+        <fa-icon [icon]="faHouse"></fa-icon>
+      </a>
       <a
         class="text-sm-center nav-link"
         [routerLink]="['/theme']"
         routerLinkActive="active"
-        >Theme</a
-      >
+        >Theme
+        <fa-icon [icon]="faShapes"></fa-icon>
+      </a>
     </div>
   </nav>
   <ng-container *ngIf="isLoading$ | async as isLoading">
