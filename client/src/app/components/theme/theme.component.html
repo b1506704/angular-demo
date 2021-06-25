@@ -1,42 +1,299 @@
-<div class="container-fluid row">
-  <div class="col">
-    <form
-      class="container-fluid"
-      [formGroup]="themeForm"
-      (ngSubmit)="onSubmit()"
+<div class="container-fluid row mt-3">
+  <div
+    class="
+      list-group
+      p-0
+      h-100
+      col-2
+      shadow-lg
+      d-flex
+      flex-column
+      justify-content-center
+      align-items-center
+    "
+  >
+    <a
+      class="list-group-item list-group-item-action"
+      (click)="scrollTo('menu')"
+      [ngClass]="{ 'bg-primary text-light': currentSection === 'menu' }"
+      >Menu</a
     >
-      <h2 class="text-center">Theme Picker</h2>
-      <div class="form-group">
-        <label for="textColor">Text Color:</label>
-        <input
-          type="color"
-          class="form-control"
-          id="textColor"
-          formControlName="textColor"
-        />
+    <a
+      class="list-group-item list-group-item-action"
+      (click)="scrollTo('card')"
+      [ngClass]="{ 'bg-primary text-light': currentSection === 'card' }"
+      >Card</a
+    >
+    <a
+      class="list-group-item list-group-item-action"
+      (click)="scrollTo('typography')"
+      [ngClass]="{ 'bg-primary text-light': currentSection === 'typography' }"
+      >Typography</a
+    >
+    <a
+      class="list-group-item list-group-item-action"
+      (click)="scrollTo('animation')"
+      [ngClass]="{ 'bg-primary text-light': currentSection === 'animation' }"
+      >Animation</a
+    >
+  </div>
+  <div
+    id="parentDiv"
+    appScrollSpy
+    [spiedTags]="['DIV']"
+    (sectionChange)="onSectionChange($event)"
+    class="col"
+    style="height: 500px; overflow-y: scroll"
+  >
+    <div class="row mb-5" id="menu">
+      <div class="col-4">
+        <form
+          class="container-fluid"
+          [formGroup]="menuThemeForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <h2 class="text-center">Menu Theme Picker</h2>
+          <div class="form-group">
+            <label for="textColor">Text Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="textColor"
+              formControlName="textColor"
+            />
+          </div>
+          <div class="form-group">
+            <label for="backgroundColor">Background Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="backgroundColor"
+              formControlName="backgroundColor"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary w-100 rounded-3 shadow-lg"
+            (click)="resetField()"
+          >
+            Reset
+          </button>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="backgroundColor">Background Color:</label>
-        <input
-          type="color"
-          class="form-control"
-          id="backgroundColor"
-          formControlName="backgroundColor"
-        />
+      <div class="col">
+        <div
+          class="col d-flex flex-column align-items-center justify-items-center"
+        >
+          <h2>Preview</h2>
+          <nav
+            class="navbar nav-tabs d-flex p-0 shadow-lg border-0 p-0"
+            style="
+              background-color: rgba(83, 110, 182, 0.39);
+              color: white;
+              height: 50px;
+              backdrop-filter: blur(5px);
+            "
+            appThemeModify
+          >
+            <h2 class="m-0 px-3">Angular Demo</h2>
+            <div class="nav flex-row">
+              <a class="text-sm-center nav-link"
+                >Home
+                <fa-icon [icon]="faHome"></fa-icon>
+              </a>
+              <a class="text-sm-center nav-link"
+                >House
+                <fa-icon [icon]="faHouse"></fa-icon>
+              </a>
+              <a class="text-sm-center nav-link"
+                >Theme
+                <fa-icon [icon]="faShapes"></fa-icon>
+              </a>
+            </div>
+          </nav>
+        </div>
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
-      >
-        Submit
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary w-100 rounded-3 shadow-lg"
-        (click)="resetField()"
-      >
-        Reset
-      </button>
-    </form>
+    </div>
+    <div class="row mb-5" id="card">
+      <div class="col-4">
+        <form
+          class="container-fluid"
+          [formGroup]="cardThemeForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <h2 class="text-center">Card Theme Picker</h2>
+          <div class="form-group">
+            <label for="textColor">Text Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="textColor"
+              formControlName="textColor"
+            />
+          </div>
+          <div class="form-group">
+            <label for="backgroundColor">Background Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="backgroundColor"
+              formControlName="backgroundColor"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary w-100 rounded-3 shadow-lg"
+            (click)="resetField()"
+          >
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="col">
+        <div
+          class="col d-flex flex-column align-items-center justify-items-center"
+        >
+          <h2>Preview</h2>
+          <div
+            class="card mt-2 rounded-3 border-5 shadow-lg"
+            style="width: 18rem"
+          >
+            <div class="card-body">
+              <h5 class="card-title">Sample Card</h5>
+              <p class="card-text">...Property: ...value</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5" id="typography">
+      <div class="col-4">
+        <form
+          class="container-fluid"
+          [formGroup]="typographyThemeForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <h2 class="text-center">Typography Format</h2>
+          <div class="form-group">
+            <label for="textColor">Text Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="textColor"
+              formControlName="textColor"
+            />
+          </div>
+          <div class="form-group">
+            <label for="backgroundColor">Background Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="backgroundColor"
+              formControlName="backgroundColor"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary w-100 rounded-3 shadow-lg"
+            (click)="resetField()"
+          >
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="col">
+        <div
+          class="col d-flex flex-column align-items-center justify-items-center"
+        >
+          <h2>Preview</h2>
+          <div
+            class="card mt-2 rounded-3 border-5 shadow-lg"
+            style="width: 18rem"
+          >
+            <div class="card-body">
+              <h5 class="card-title">Sample Card</h5>
+              <p class="card-text">...Property: ...value</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="animation">
+      <div class="col-4">
+        <form
+          class="container-fluid"
+          [formGroup]="animationThemeForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <h2 class="text-center">Animation Settings</h2>
+          <div class="form-group">
+            <label for="textColor">Text Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="textColor"
+              formControlName="textColor"
+            />
+          </div>
+          <div class="form-group">
+            <label for="backgroundColor">Background Color:</label>
+            <input
+              type="color"
+              class="form-control"
+              id="backgroundColor"
+              formControlName="backgroundColor"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary w-100 rounded-3 shadow-lg"
+            (click)="resetField()"
+          >
+            Reset
+          </button>
+        </form>
+      </div>
+      <div class="col">
+        <div
+          class="col d-flex flex-column align-items-center justify-items-center"
+        >
+          <h2>Preview</h2>
+          <div
+            class="card mt-2 rounded-3 border-5 shadow-lg"
+            style="width: 18rem"
+          >
+            <div class="card-body">
+              <h5 class="card-title">Sample Card</h5>
+              <p class="card-text">...Property: ...value</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block" style="height: 410px"></div>
   </div>
 </div>

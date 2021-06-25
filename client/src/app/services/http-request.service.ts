@@ -27,6 +27,15 @@ export class FetchHouseService {
       .pipe(catchError(this.handleError));
   }
 
+  uploadCategory(category: Category): Observable<Category> {
+    return this.http
+      .post<Category>(this.apiCategoryUrl, category, {
+        reportProgress: true,
+        observe: 'body',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   fetchHouse(): Observable<House> {
     return this.http
       .get<House>(this.apiHouseUrl, {

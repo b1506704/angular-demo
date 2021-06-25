@@ -2,11 +2,11 @@
   <ng-container *ngIf="categoryList$ | async as category">
     <app-house-control-panel [category]="category"></app-house-control-panel>
   </ng-container>
-  <!-- first child get value from parent -->
   <ng-container *ngIf="houseList$ | async as house">
+    <!-- first child get value from parent -->
     <app-house-card [house]="house"></app-house-card>
+    <!-- second child with custom pipe -->
+    <app-house-carousel [house]="house"></app-house-carousel>
   </ng-container>
-  <!-- second child but get value from store instead, indepent of filter/search... -->
-  <app-house-carousel></app-house-carousel>
   <app-modal-update></app-modal-update>
 </div>

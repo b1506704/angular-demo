@@ -1,6 +1,6 @@
 <div class="container-fluid mt-5">
-  <ng-container *ngIf="houseList$ | async as house">
-    <h2>Carousel View ({{house.length}}) </h2>
+  <ng-container *ngIf="house">
+    <h2>Carousel View (PRICE {{ criteria }} {{ filterValue }})</h2>
     <div
       id="carouselExampleDark"
       class="carousel carousel-dark slide"
@@ -21,18 +21,22 @@
         <div
           class="carousel-item"
           data-bs-interval="10000"
-          *ngFor="let item of house; index as i"
-          [ngClass]="{ active: i === 1 }"
+          *ngFor="
+            let item of house | filterByPrice: filterValue:criteria;
+            index as i
+          "
+          [ngClass]="{ active: i === 0 }"
         >
           <img
             src="{{ item.imgUrl }}"
             class="d-block w-100 shadow-lg"
             alt="..."
-            style="width: 100% !important; height: 800px; border-radius: 25px"
+            style="width: 100% !important; height: 500px; border-radius: 25px"
           />
           <div class="carousel-caption d-none d-md-block">
-            <h5 class="text-light bg-dark shadow-lg">{{ i }}</h5>
+            <h5 class="text-light bg-dark shadow-lg">{{ i + 1 }}</h5>
             <p class="text-light bg-dark shadow-lg">{{ item.message }}</p>
+            <p class="text-light bg-dark shadow-lg">{{ item.price }} Tỷ VND</p>
           </div>
         </div>
       </div>

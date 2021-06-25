@@ -21,8 +21,9 @@ import { ModalUpdateComponent } from './components/modal-update/modal-update.com
 import { NotificationComponent } from './components/notification/notification.component';
 import { ThemeModifyDirective } from './directives/theme-modify.directive';
 import { ThemeComponent } from './components/theme/theme.component';
-import { LiveSearchPipe } from './pipes/live-search.pipe';
+import { FilterByPricePipe } from './pipes/filterByPrice.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScrollSpyDirective } from './directives/scroll-spy.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NotificationComponent,
     ThemeModifyDirective,
     ThemeComponent,
-    LiveSearchPipe,
+    FilterByPricePipe,
+    ScrollSpyDirective,
   ],
   imports: [
     BrowserModule,

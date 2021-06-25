@@ -13,8 +13,8 @@ export class HouseCardComponent implements OnInit {
   // data from parent component
   @Input() house: Array<House> = [];
   constructor(private store: StoreService, private md: NgbModal) {}
-  // set selectedHouse in store
   $mdObs: Observable<TemplateRef<any>> = this.store.$modalRef;
+  // set selectedHouse in store
   selectHouse(house: House) {
     this.store.selectHouse(house);
   }

@@ -5,7 +5,7 @@ import { StoreService } from 'src/app/services/store.service';
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.css']
+  styleUrls: ['./category-form.component.css'],
 })
 export class CategoryFormComponent implements OnInit {
   imgUrl: string = '';
@@ -14,7 +14,11 @@ export class CategoryFormComponent implements OnInit {
   constructor(private store: StoreService, private fb: FormBuilder) {}
 
   onSubmit() {
-    console.log(JSON.stringify(this.categoryForm.value));
+    const toUploadCategory = this.categoryForm.value;
+    if (toUploadCategory.name && toUploadCategory.imgUrl) {
+      this.store.uploadCategory(this.categoryForm.value);
+      // console.log(JSON.stringify(this.categoryForm.value));
+    }
   }
 
   resetField() {
@@ -40,12 +44,15 @@ export class CategoryFormComponent implements OnInit {
   _handleReaderLoaded(e: any) {
     var reader = e.target;
     this.imgUrl = reader.result;
-    this.categoryForm.patchValue({ imageUrl: reader.result });
+    this.categoryForm.patchValue({ imgUrl: reader.result });
   }
 
   categoryForm = this.fb.group({
-    name: ['', [Validators.required,Validators.minLength(1), Validators.maxLength(25)]],
-    imageUrl: ['', Validators.required],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(1), Validators.maxLength(25)],
+    ],
+    imgUrl: ['', Validators.required],
   });
 
   ngOnInit(): void {
@@ -57,5 +64,4 @@ export class CategoryFormComponent implements OnInit {
       }
     });
   }
-
 }

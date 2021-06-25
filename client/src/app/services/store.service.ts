@@ -11,6 +11,7 @@ interface HouseState {
   categoryList: Array<Category>;
   selectedHouse: Object;
   createdHouse: Object;
+  createdCategory: Object;
   deletedHouse: Object;
   updatedHouse: Object;
   filteredHouseList: Array<House>;
@@ -28,6 +29,7 @@ const initialState: HouseState = {
   categoryList: [],
   selectedHouse: {},
   createdHouse: {},
+  createdCategory: {},
   deletedHouse: {},
   updatedHouse: {},
   filteredHouseList: [],
@@ -155,6 +157,23 @@ export class StoreService extends StateService<HouseState> {
         if (this.checkIsLoading() === true && fetchCategory.closed === true) {
           this.setIsLoading(false);
           this.showNotifSuccess('Load data successfully!');
+        }
+      },
+    });
+  }
+
+  uploadCategory(category: Category) {
+    this.setIsLoading(true);
+    this.apiService.uploadCategory(category).subscribe({
+      next: (data: any) => {
+        this.setState({ createdCategory: data });
+        console.log(data);
+      },
+      complete: () => {
+        if (this.checkIsLoading() === true) {
+          this.setIsLoading(false);
+          this.loadDataAsync();
+          this.showNotifSuccess(`Category: ${category.name} uploaded!`);
         }
       },
     });

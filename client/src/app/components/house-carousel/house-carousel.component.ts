@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 import { House } from 'src/app/models/house.model';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -9,9 +8,11 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./house-carousel.component.css'],
 })
 export class HouseCarouselComponent implements OnInit {
+  @Input() house: Array<House> = [];
+  //test value for pipe
+  filterValue: Number = 5;
+  criteria: string = 'GREATER_THAN';
+  
   constructor(private store: StoreService) {}
-
-  houseList$: Observable<Array<House>> = this.store.$houseList;
-
   ngOnInit(): void {}
 }
