@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,8 @@ import { ThemeComponent } from './components/theme/theme.component';
 import { FilterByPricePipe } from './pipes/filterByPrice.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScrollSpyDirective } from './directives/scroll-spy.directive';
+import { HouseDetailComponent } from './components/house-detail/house-detail.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,12 @@ import { ScrollSpyDirective } from './directives/scroll-spy.directive';
     ThemeComponent,
     FilterByPricePipe,
     ScrollSpyDirective,
+    HouseDetailComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

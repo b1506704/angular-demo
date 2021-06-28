@@ -97,9 +97,9 @@
               background-color: rgba(83, 110, 182, 0.39);
               color: white;
               height: 50px;
-              backdrop-filter: blur(5px);
             "
             appThemeModify
+            inputType="menu"
           >
             <h2 class="m-0 px-3">Angular Demo</h2>
             <div class="nav flex-row">
@@ -125,24 +125,24 @@
         <form
           class="container-fluid"
           [formGroup]="cardThemeForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onCardSubmit()"
         >
           <h2 class="text-center">Card Theme Picker</h2>
           <div class="form-group">
-            <label for="textColor">Text Color:</label>
+            <label for="cardTextColor">Text Color:</label>
             <input
               type="color"
               class="form-control"
-              id="textColor"
+              id="cardTextColor"
               formControlName="textColor"
             />
           </div>
           <div class="form-group">
-            <label for="backgroundColor">Background Color:</label>
+            <label for="cardBackgroundColor">Background Color:</label>
             <input
               type="color"
               class="form-control"
-              id="backgroundColor"
+              id="cardBackgroundColor"
               formControlName="backgroundColor"
             />
           </div>
@@ -155,7 +155,7 @@
           <button
             type="button"
             class="btn btn-primary w-100 rounded-3 shadow-lg"
-            (click)="resetField()"
+            (click)="resetCardField()"
           >
             Reset
           </button>
@@ -169,6 +169,8 @@
           <div
             class="card mt-2 rounded-3 border-5 shadow-lg"
             style="width: 18rem"
+            appThemeModify
+            inputType="card"
           >
             <div class="card-body">
               <h5 class="card-title">Sample Card</h5>
@@ -183,26 +185,30 @@
         <form
           class="container-fluid"
           [formGroup]="typographyThemeForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onTypoSubmit()"
         >
           <h2 class="text-center">Typography Format</h2>
           <div class="form-group">
-            <label for="textColor">Text Color:</label>
+            <label for="fontSize">Font Size:{{typographyThemeForm.value.fontSize}}</label>
             <input
-              type="color"
-              class="form-control"
-              id="textColor"
-              formControlName="textColor"
+              type="range"
+              min="10"
+              max="18"
+              class="form-control form-range"
+              id="fontSize"
+              formControlName="fontSize"
             />
           </div>
           <div class="form-group">
-            <label for="backgroundColor">Background Color:</label>
-            <input
-              type="color"
-              class="form-control"
-              id="backgroundColor"
-              formControlName="backgroundColor"
-            />
+            <label for="fontFamily">Font Family:</label>
+            <select
+              id="fontFamily"
+              class="form-select"
+              formControlName="fontFamily"
+            >
+              <option value="monospace">Monospace</option>
+              <option value="Aria">Aria</option>
+            </select>
           </div>
           <button
             type="submit"
@@ -213,7 +219,7 @@
           <button
             type="button"
             class="btn btn-primary w-100 rounded-3 shadow-lg"
-            (click)="resetField()"
+            (click)="resetTypoField()"
           >
             Reset
           </button>
@@ -227,6 +233,8 @@
           <div
             class="card mt-2 rounded-3 border-5 shadow-lg"
             style="width: 18rem"
+            appThemeModify
+            inputType="typo"
           >
             <div class="card-body">
               <h5 class="card-title">Sample Card</h5>
@@ -241,25 +249,25 @@
         <form
           class="container-fluid"
           [formGroup]="animationThemeForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="onAnimationSubmit()"
         >
           <h2 class="text-center">Animation Settings</h2>
           <div class="form-group">
-            <label for="textColor">Text Color:</label>
+            <label for="hoverTextColor">Hover Text Color:</label>
             <input
               type="color"
               class="form-control"
-              id="textColor"
-              formControlName="textColor"
+              id="hoverTextColor"
+              formControlName="hoverTextColor"
             />
           </div>
           <div class="form-group">
-            <label for="backgroundColor">Background Color:</label>
+            <label for="hoverBackgroundColor">Hover Background Color:</label>
             <input
               type="color"
               class="form-control"
-              id="backgroundColor"
-              formControlName="backgroundColor"
+              id="hoverBackgroundColor"
+              formControlName="hoverBackgroundColor"
             />
           </div>
           <button
@@ -271,7 +279,7 @@
           <button
             type="button"
             class="btn btn-primary w-100 rounded-3 shadow-lg"
-            (click)="resetField()"
+            (click)="resetAnimationField()"
           >
             Reset
           </button>
@@ -282,15 +290,32 @@
           class="col d-flex flex-column align-items-center justify-items-center"
         >
           <h2>Preview</h2>
-          <div
-            class="card mt-2 rounded-3 border-5 shadow-lg"
-            style="width: 18rem"
+          <nav
+            class="navbar nav-tabs d-flex p-0 shadow-lg border-0 p-0"
+            style="
+              background-color: rgba(83, 110, 182, 0.39);
+              color: white;
+              height: 50px;
+            "
+            appThemeModify
+            inputType="animation"
           >
-            <div class="card-body">
-              <h5 class="card-title">Sample Card</h5>
-              <p class="card-text">...Property: ...value</p>
+            <h2 class="m-0 px-3">Angular Demo</h2>
+            <div class="nav flex-row">
+              <a class="text-sm-center nav-link"
+                >Home
+                <fa-icon [icon]="faHome"></fa-icon>
+              </a>
+              <a class="text-sm-center nav-link"
+                >House
+                <fa-icon [icon]="faHouse"></fa-icon>
+              </a>
+              <a class="text-sm-center nav-link"
+                >Theme
+                <fa-icon [icon]="faShapes"></fa-icon>
+              </a>
             </div>
-          </div>
+          </nav>
         </div>
       </div>
     </div>

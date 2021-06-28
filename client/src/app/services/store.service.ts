@@ -1,5 +1,6 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { House } from '../models/house.model';
 import { StateService } from '../shared/state.service';
@@ -23,6 +24,12 @@ interface HouseState {
   toggleUpdateForm?: TemplateRef<any>;
   backgroundColor: any;
   textColor: any;
+  cardBackgroundColor: any;
+  cardTextColor: any;
+  typoFontSize: any;
+  typoFontFamily: any;
+  hoverTextColor: any;
+  hoverBackgroundColor: any;
 }
 const initialState: HouseState = {
   houseList: [],
@@ -41,6 +48,12 @@ const initialState: HouseState = {
   toggleUpdateForm: undefined,
   backgroundColor: undefined,
   textColor: undefined,
+  cardBackgroundColor: undefined,
+  cardTextColor: undefined,
+  typoFontSize: undefined,
+  typoFontFamily: undefined,
+  hoverTextColor: undefined,
+  hoverBackgroundColor: undefined,
 };
 @Injectable({
   providedIn: 'root',
@@ -88,6 +101,26 @@ export class StoreService extends StateService<HouseState> {
   );
 
   $textColor: Observable<any> = this.select((state) => state.textColor);
+
+  $cardBackgroundColor: Observable<any> = this.select(
+    (state) => state.cardBackgroundColor
+  );
+
+  $cardTextColor: Observable<any> = this.select((state) => state.cardTextColor);
+
+  $typoFontSize: Observable<any> = this.select((state) => state.typoFontSize);
+
+  $typoFontFamily: Observable<any> = this.select(
+    (state) => state.typoFontFamily
+  );
+
+  $hoverBackgroundColor: Observable<any> = this.select(
+    (state) => state.hoverBackgroundColor
+  );
+
+  $hoverTextColor: Observable<any> = this.select(
+    (state) => state.hoverTextColor
+  );
 
   $categoryList: Observable<Array<Category>> = this.select(
     (state) => state.categoryList
@@ -240,6 +273,12 @@ export class StoreService extends StateService<HouseState> {
     this.setState({ selectedHouse: _house });
   }
 
+  getHouse(id: string | number) {
+    return this.$houseList.pipe(
+      map((houses: Array<House>) => houses.find((house) => house.id === id)!)
+    );
+  }
+
   setLastVisit(_date: Date) {
     this.setState({ lastVisitTime: _date });
   }
@@ -282,5 +321,35 @@ export class StoreService extends StateService<HouseState> {
   setTextColor(color: any) {
     this.setState({ textColor: color });
     this.showNotifSuccess(`Set text color to ${color}`);
+  }
+
+  setCardBackgroundColor(color: any) {
+    this.setState({ cardBackgroundColor: color });
+    this.showNotifSuccess(`Set card background color to ${color}`);
+  }
+
+  setCardTextColor(color: any) {
+    this.setState({ cardTextColor: color });
+    this.showNotifSuccess(`Set card text color to ${color}`);
+  }
+
+  setTypoFontSize(fontSize: any) {
+    this.setState({ typoFontSize: fontSize });
+    this.showNotifSuccess(`Set font size to ${fontSize}`);
+  }
+
+  setTypoFontFamily(fontFamily: any) {
+    this.setState({ typoFontFamily: fontFamily });
+    this.showNotifSuccess(`Set font family to ${fontFamily}`);
+  }
+
+  setHoverTextColor(color: any) {
+    this.setState({ hoverTextColor: color });
+    this.showNotifSuccess(`Set hover text color to ${color}`);
+  }
+
+  setHoverBackgroundColor(color: any) {
+    this.setState({ hoverBackgroundColor: color });
+    this.showNotifSuccess(`Set hover background color to ${color}`);
   }
 }

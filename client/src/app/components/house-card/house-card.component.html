@@ -1,27 +1,31 @@
 <div class="container-fluid mt-5">
-  <h2>Card View ({{house.length}})</h2>
+  <h2>Card View ({{ house.length }})</h2>
   <div class="row justify-content-evenly align-content-center">
     <div
       class="card mt-5 rounded-3 border-5 shadow-lg"
       style="width: 18rem"
       *ngFor="let item of house"
+      appThemeModify
+      inputType="card"
     >
-      <img src="{{ item.imgUrl }}" class="card-img-top" alt="..." />
+      <img
+        src="{{ item.imgUrl }}"
+        class="card-img-top img-fluid h-100 w-100"
+        alt="..."
+      />
       <div class="card-body">
         <h5 class="card-title">{{ item.message }}</h5>
-        <p class="card-text">ID: {{ item.id }}</p>
         <p class="card-text">Price: {{ item.price }} Tỷ</p>
-        <p class="card-text">Category: {{ item.category }}</p>
-        <p class="card-text">Area: {{ item.area }} M2</p>
-        <p class="card-text">Front: {{ item.front }} M2</p>
-        <p class="card-text">Address: {{ item.address }}</p>
-        <p class="card-text">Direction: {{ item.direction }}</p>
         <div class="btn-group shadow-lg">
           <button class="btn btn-primary" (click)="selectHouse(item)">
             Detail
           </button>
-          <button class="btn btn-primary" (click)="deleteHouse(item)">Delete</button>
-          <button class="btn btn-primary" (click)="updateHouse(item)">Update</button>
+          <button class="btn btn-primary" (click)="deleteHouse(item)">
+            Delete
+          </button>
+          <button class="btn btn-primary" (click)="updateHouse(item)">
+            Update
+          </button>
         </div>
       </div>
     </div>
