@@ -9,7 +9,7 @@
 >
   <div class="flex-row">
     <div class="col mt-1">
-      <button class="btn btn-primary shadow" (click)="subRouteA()">
+      <button class="btn btn-primary shadow" (click)="subRouteA()" >
         Route A
       </button>
     </div>
@@ -18,9 +18,6 @@
     </div>
   </div>
   <router-outlet></router-outlet>
-  <h2 class="my-3">
-    Selected House: {{ selectedHouse ? selectedHouse.id : null }}
-  </h2>
   <p class="text-body">
     Someone has just left House route since: {{ houseVisitTime }}
   </p>

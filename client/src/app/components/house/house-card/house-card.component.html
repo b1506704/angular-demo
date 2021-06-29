@@ -1,0 +1,57 @@
+<div class="container-fluid mt-5">
+  <h2>Card View ({{ house.length }})</h2>
+  <div class="row justify-content-evenly align-content-center">
+    <div
+      class="card mt-5 rounded-3 border-5 shadow-lg"
+      style="width: 18rem"
+      *ngFor="let item of house | slice: (page - 1) * pageSize:page * pageSize"
+      appThemeModify
+      inputType="card"
+    >
+      <img
+        src="{{ item.imgUrl }}"
+        class="card-img-top img-fluid h-100 w-100"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title d-block text-truncate">{{ item.message }}</h5>
+        <p class="card-text d-block text-truncate">
+          Price: {{ item.price }} Tỷ
+        </p>
+        <div class="btn-group w-100 shadow-lg align-self-center text-center">
+          <button
+            class="btn btn-primary"
+            (click)="selectHouse(item)"
+            appThemeModify
+            inputType="animation"
+          >
+            Detail
+          </button>
+          <button
+            class="btn btn-primary"
+            (click)="deleteHouse(item)"
+            appThemeModify
+            inputType="animation"
+          >
+            Delete
+          </button>
+          <button
+            class="btn btn-primary"
+            (click)="updateHouse(item)"
+            appThemeModify
+            inputType="animation"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex w-100 justify-content-end mt-3">
+    <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="house.length"
+    ></ngb-pagination>
+  </div>
+</div>

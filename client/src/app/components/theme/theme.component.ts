@@ -52,12 +52,14 @@ export class ThemeComponent implements OnInit {
   }
 
   typographyThemeForm = this.fb.group({
-    fontSize: [14],
-    fontFamily: ['monospace']
+    fontSize: [0],
+    fontFamily: [''],
+    letterSpacing: [0]
   });
 
   onTypoSubmit() {
     this.store.setTypoFontSize(this.typographyThemeForm.value.fontSize);
+    this.store.setTypoLetterSpacing(this.typographyThemeForm.value.letterSpacing);
     this.store.setTypoFontFamily(this.typographyThemeForm.value.fontFamily);
   }
 

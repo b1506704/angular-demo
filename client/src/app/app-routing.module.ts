@@ -1,37 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { HouseDetailComponent } from './components/house-detail/house-detail.component';
-import { HouseComponent } from './components/house/house.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { RouteAComponent } from './components/route-a/route-a.component';
-import { RouteBComponent } from './components/route-b/route-b.component';
-import { ThemeComponent } from './components/theme/theme.component';
 
 const routes: Routes = [
   {
     path: 'houses',
-    component: HouseComponent,
     data: { animation: 'Houses' },
+    loadChildren: () => import('./components/house/house.module').then(m => m.HouseModule)
   },
   {
     path: 'house/:id',
-    component: HouseDetailComponent,
     data: { animation: 'House' },
+    loadChildren: () => import('./components/house-detail/house-detail.module').then(m => m.HouseDetailModule)
   },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: 'home', 
     data: { animation: 'Home' },
-    children: [
-      { path: 'route_a', component: RouteAComponent },
-      { path: 'route_b', component: RouteBComponent },
-    ],
+    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'theme',
-    component: ThemeComponent,
     data: { animation: 'Theme' },
+    loadChildren: () => import('./components/theme/theme.module').then(m => m.ThemeModule)
   },
   {
     path: '',
@@ -40,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadChildren: () => import('./components/not-found/not-found.module').then(m => m.NotFoundModule)
   },
 ];
 

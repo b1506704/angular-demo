@@ -9,12 +9,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Category } from 'src/app/models/category.model';
 import { House } from 'src/app/models/house.model';
 import { StoreService } from 'src/app/services/store.service';
+
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-modal-update',
   templateUrl: './modal-update.component.html',
   styleUrls: ['./modal-update.component.css'],
 })
 export class ModalUpdateComponent implements OnInit {
+  faWindowClose = faWindowClose;
   @ViewChild('modalData', { static: true })
   modalData!: TemplateRef<any>;
   currentHouse!: House;
@@ -132,7 +136,7 @@ export class ModalUpdateComponent implements OnInit {
           this.isChecking = false;
         }
       });
-      console.log(this.houseForm.value);
+      // console.log(this.houseForm.value);
     });
   }
 }

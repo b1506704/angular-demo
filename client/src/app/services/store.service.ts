@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { House } from '../models/house.model';
-import { StateService } from '../shared/state.service';
+import { StateService } from '../shared/services/state.service';
 import { FetchHouseService } from './http-request.service';
 import { NotificationService } from './notification.service';
 
@@ -27,6 +27,7 @@ interface HouseState {
   cardBackgroundColor: any;
   cardTextColor: any;
   typoFontSize: any;
+  typoLetterSpacing: any;
   typoFontFamily: any;
   hoverTextColor: any;
   hoverBackgroundColor: any;
@@ -50,8 +51,9 @@ const initialState: HouseState = {
   textColor: undefined,
   cardBackgroundColor: undefined,
   cardTextColor: undefined,
-  typoFontSize: undefined,
-  typoFontFamily: undefined,
+  typoFontSize: 20,
+  typoLetterSpacing: 1,
+  typoFontFamily: '',
   hoverTextColor: undefined,
   hoverBackgroundColor: undefined,
 };
@@ -110,6 +112,10 @@ export class StoreService extends StateService<HouseState> {
 
   $typoFontSize: Observable<any> = this.select((state) => state.typoFontSize);
 
+  $typoLetterSpacing: Observable<any> = this.select(
+    (state) => state.typoLetterSpacing
+  );
+
   $typoFontFamily: Observable<any> = this.select(
     (state) => state.typoFontFamily
   );
@@ -149,7 +155,7 @@ export class StoreService extends StateService<HouseState> {
 
   triggerModal(content: TemplateRef<any>) {
     this.setState({ toggleUpdateForm: content });
-    console.log(content);
+    // console.log(content);
   }
 
   loadData() {
@@ -336,6 +342,11 @@ export class StoreService extends StateService<HouseState> {
   setTypoFontSize(fontSize: any) {
     this.setState({ typoFontSize: fontSize });
     this.showNotifSuccess(`Set font size to ${fontSize}`);
+  }
+
+  setTypoLetterSpacing(px: any) {
+    this.setState({ typoLetterSpacing: px });
+    this.showNotifSuccess(`Set letter spacing to ${px}`);
   }
 
   setTypoFontFamily(fontFamily: any) {

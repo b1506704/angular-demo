@@ -1,31 +1,28 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { StoreService } from '../services/store.service';
+import { StoreService } from '../../services/store.service';
 
 @Directive({
   selector: '[appThemeModify]',
 })
 export class ThemeModifyDirective {
-  @Input() txtColor!: string;
-  @Input() bgColor!: string;
   @Input() inputType!: string;
-  hoverClass = '';
 
   constructor(private elRef: ElementRef, private store: StoreService) {}
-  // @HostListener('mouseenter') onMouseEnter() {
-  //   this.elRef.nativeElement.classList.add(this.hoverClass);
-  // }
-
-  // @HostListener('mouseleave') onMouseLeave() {
-  //   this.elRef.nativeElement.classList.remove(this.hoverClass);
-  // }
-
-  renderWithInput() {
-    //render if input is provided
-    if (this.txtColor) {
-      this.elRef.nativeElement.style.color = this.txtColor;
+  @HostListener('mouseenter') onMouseEnter() {
+    if (this.inputType === 'animation') {
+      this.store.$hoverBackgroundColor.subscribe((data: any) => {
+        this.elRef.nativeElement.style.backgroundColor = data;
+      });
+      this.store.$hoverTextColor.subscribe((data: any) => {
+        this.elRef.nativeElement.style.color = data;
+      });
     }
-    if (this.bgColor) {
-      this.elRef.nativeElement.style.backgroundColor = this.bgColor;
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    if (this.inputType === 'animation') {
+      this.elRef.nativeElement.style.backgroundColor = '';
+      this.elRef.nativeElement.style.color = '';
     }
   }
 
@@ -54,13 +51,8 @@ export class ThemeModifyDirective {
         this.store.$typoFontSize.subscribe((data: any) => {
           this.elRef.nativeElement.style.fontSize = data + 'px';
         });
-        break;
-      case 'animation':
-        this.store.$hoverBackgroundColor.subscribe((data: any) => {
-          this.hoverClass += `background-color: ${data};`;
-        });
-        this.store.$hoverTextColor.subscribe((data: any) => {
-          this.hoverClass += `color: ${data};`;
+        this.store.$typoLetterSpacing.subscribe((data: any) => {
+          this.elRef.nativeElement.style.letterSpacing = data + 'px';
         });
         break;
       default:
@@ -68,7 +60,6 @@ export class ThemeModifyDirective {
     }
   }
   ngAfterViewInit(): void {
-    this.renderWithInput();
     this.renderWithObservable();
   }
 }

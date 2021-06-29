@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { House } from 'src/app/models/house.model';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class HomeComponent implements OnInit {
   msgFromChild = '';
-  selectedHouse!: House;
   houseVisitTime: Date = new Date();
   constructor(
     private route: ActivatedRoute,
@@ -27,13 +25,18 @@ export class HomeComponent implements OnInit {
     this.msgFromChild = msg;
   }
 
-  ngOnInit(): void {
-    // example of ActivatedRoute Observable
-    this.route.url.subscribe((url) => console.log('Current route: ' + url));
-    this.store.$state.subscribe((state: any) => {
-      this.selectedHouse = state.selectedHouse;
+  subscribeFromStore() {
+    const stateObs$ = this.store.$state.subscribe((state: any) => {
       this.houseVisitTime = state.lastVisitTime;
     });
+    return stateObs$;
   }
-  // unsubscribe observable
+
+  ngOnInit(): void {
+    this.subscribeFromStore();
+  }
+
+  ngOnDestroy(): void {
+    // this.subscribeFromStore().unsubscribe();
+  }
 }

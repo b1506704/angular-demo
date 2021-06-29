@@ -19,6 +19,8 @@ export class HouseCardComponent implements OnInit {
     private router: Router
   ) {}
   $mdObs: Observable<TemplateRef<any>> = this.store.$modalRef;
+  page: number = 1;
+  pageSize: number = 4;
   // set selectedHouse in store
   selectHouse(house: House) {
     this.router.navigate(['house', house.id]);

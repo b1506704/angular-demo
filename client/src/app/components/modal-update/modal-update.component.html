@@ -1,5 +1,5 @@
 <ng-template #modalData let-modal>
-  <div class="modal-header">
+  <div class="modal-header" appThemeModify inputType="typo">
     <h1 class="modal-title" id="modal-basic-title">Update House</h1>
     <button
       type="button"
@@ -7,10 +7,13 @@
       aria-label="Close"
       (click)="modal.dismiss('Cross click')"
     >
-      <span aria-hidden="true">×</span>
+      <fa-icon [icon]="faWindowClose
+      "></fa-icon>
+      <!-- <span aria-hidden="true">×</span> -->
     </button>
   </div>
-  <div class="modal-body row">
+
+  <div class="modal-body row" appThemeModify inputType="typo">
     <div class="col">
       <form
         class="container-fluid"
@@ -103,6 +106,7 @@
         <button
           type="submit"
           class="btn btn-primary w-100 rounded-3 shadow-lg my-3"
+          appThemeModify inputType="animation"
         >
           Submit
         </button>
@@ -110,6 +114,7 @@
           type="button"
           class="btn btn-primary w-100 rounded-3 shadow-lg"
           (click)="resetField()"
+          appThemeModify inputType="animation"
         >
           Reset
         </button>
@@ -148,6 +153,7 @@
     <button
       type="button"
       class="btn btn-danger"
+      appThemeModify inputType="animation"
       (click)="modal.close('Save click')"
     >
       Close
