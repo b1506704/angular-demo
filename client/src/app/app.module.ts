@@ -28,7 +28,7 @@ import { DirectivesModule } from './shared/directives/directive.module';
     ReactiveFormsModule,
     FontAwesomeModule,
     NgbModule,
-    DirectivesModule
+    DirectivesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
   },
   {
+    path: 'admin', 
+    data: { animation: 'Admin' },
+    loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path: 'theme',
     data: { animation: 'Theme' },
     loadChildren: () => import('./components/theme/theme.module').then(m => m.ThemeModule)

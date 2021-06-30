@@ -1,7 +1,7 @@
 <div class="wrapper" appThemeModify inputType="typo">
   <app-notification aria-live="polite" aria-atomic="true"></app-notification>
   <app-nav-bar></app-nav-bar>
-  <div [@routeAnimation]="getAnimationData(routerOutlet)">
+  <div [@routeAnimation]="getAnimationData(routerOutlet)" style="min-height: 90vh;">
     <router-outlet #routerOutlet="outlet">
       <div class="bar_loader" *ngIf="lazyLoading"></div>
     </router-outlet>

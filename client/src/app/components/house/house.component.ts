@@ -49,6 +49,12 @@ export class HouseComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    if (this.isFiltering === true || this.isSearching === true) {
+      this.store.setIsFiltering(false);
+      this.store.setIsSearching(false);
+    }
+    
+    this.searchListener().unsubscribe();
     this.searchListener().unsubscribe();
     this.filterListener().unsubscribe();
     this.store.setLastVisit(this.date);

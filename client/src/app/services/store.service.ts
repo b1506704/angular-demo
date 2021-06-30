@@ -51,9 +51,9 @@ const initialState: HouseState = {
   textColor: undefined,
   cardBackgroundColor: undefined,
   cardTextColor: undefined,
-  typoFontSize: 20,
-  typoLetterSpacing: 1,
-  typoFontFamily: '',
+  typoFontSize: 15,
+  typoLetterSpacing: 0,
+  typoFontFamily: 'monospace',
   hoverTextColor: undefined,
   hoverBackgroundColor: undefined,
 };

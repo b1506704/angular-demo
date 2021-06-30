@@ -16,7 +16,8 @@
         class="text-sm-center nav-link text-dark"
         [routerLink]="['/home']"
         routerLinkActive="active"
-        appThemeModify inputType="animation"
+        appThemeModify
+        inputType="animation"
         >Home
         <fa-icon [icon]="faHome"></fa-icon>
       </a>
@@ -24,15 +25,26 @@
         class="text-sm-center nav-link text-dark"
         [routerLink]="['/houses']"
         routerLinkActive="active"
-        appThemeModify inputType="animation"
+        appThemeModify
+        inputType="animation"
         >House
         <fa-icon [icon]="faHouse"></fa-icon>
       </a>
       <a
         class="text-sm-center nav-link text-dark"
+        [routerLink]="['/admin']"
+        routerLinkActive="active"
+        appThemeModify
+        inputType="animation"
+        >Admin
+        <fa-icon [icon]="faTools"></fa-icon>
+      </a>
+      <a
+        class="text-sm-center nav-link text-dark"
         [routerLink]="['/theme']"
         routerLinkActive="active"
-        appThemeModify inputType="animation"
+        appThemeModify
+        inputType="animation"
         >Theme
         <fa-icon [icon]="faShapes"></fa-icon>
       </a>

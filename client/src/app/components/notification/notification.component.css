@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   top: auto !important;
-  bottom: 6% !important;
+  bottom: 0 !important;
   right: auto !important;
   left: 75% !important;
   max-width: 300px;
