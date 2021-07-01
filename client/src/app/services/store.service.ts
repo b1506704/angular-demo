@@ -45,7 +45,7 @@ const initialState: HouseState = {
   isLoading: false,
   isFiltering: false,
   isSearching: false,
-  lastVisitTime: new Date(0, 0, 0, 0),
+  lastVisitTime: new Date(),
   toggleUpdateForm: undefined,
   backgroundColor: undefined,
   textColor: undefined,

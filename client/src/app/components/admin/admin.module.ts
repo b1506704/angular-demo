@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalUpdateModule } from 'src/app/shared/components/modal-update/modal-update.module';
 import { SortHeader } from './sort-header.directive';
 import { HouseFormModule } from 'src/app/shared/components/house-form/house-form.module';
+import { EditHouseComponent } from './edit-house/edit-house.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { HouseFormModule } from 'src/app/shared/components/house-form/house-form
     ModalUpdateModule,
     HouseFormModule
   ],
-  declarations: [AdminComponent, SortHeader],
+  declarations: [AdminComponent, SortHeader, EditHouseComponent],
 })
 export class AdminModule {}
